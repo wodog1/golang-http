@@ -81,9 +81,7 @@ pipeline {
             container('go') {
               sh 'jx step changelog --version v\$(cat ../../VERSION)'
               
-              sh 'helm init --client-only'           
-              sh 'helm repo add releases http://chartmuseum.jx.kid17.com'
-              sh 'helm repo add jenkins-x https://chartmuseum.build.cd.jenkins-x.io'
+              sh 'helm init --client-only --skip-refresh'           
 
               // release the helm chart
               sh 'jx step helm release'
