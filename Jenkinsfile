@@ -80,6 +80,9 @@ pipeline {
           dir ('/home/jenkins/go/src/github.com/wodog1/golang-http/charts/golang-http') {
             container('go') {
               sh 'jx step changelog --version v\$(cat ../../VERSION)'
+              
+              sh 'helm repo add releases http://chartmuseum.jx.kid17.com'
+              sh 'helm repo add jenkins-x https://chartmuseum.build.cd.jenkins-x.io'
 
               // release the helm chart
               sh 'jx step helm release'
